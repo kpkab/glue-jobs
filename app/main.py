@@ -23,7 +23,7 @@ app = FastAPI(openapi_url="/job/openapi.json",docs_url="/job/docs")
 @app.post("/job/create_job", response_model=SuccessResponse)
 async def create_job(glue:Glue_job):
     """
-    This endpoint creates a Glue table for glue databse.
+    This endpoint creates a Glue job.
     """
     try:
         response = client.create_job(
@@ -84,7 +84,7 @@ async def get_jobs():
         return ExceptionResponse()
 
 @app.get("/job/get_job/{Name}")
-async def get_table(Name: str): 
+async def get_job(Name: str): 
     """
     This endpoint return the specific Glue job.
     """
@@ -115,7 +115,7 @@ async def get_table(Name: str):
 @app.delete("/job/delete_job/{Name}")
 async def delete_job(Name: str): 
     """
-    This endpoint creates a Glue table for glue databse.
+    This endpoint delete a Glue job.
     """
     try:
         response = client.delete_job(
@@ -141,7 +141,7 @@ async def delete_job(Name: str):
 @app.put("/job/update_job")
 async def update_job(glue:Glue_job):
     """
-    This endpoint creates a Glue table for glue databse.
+    This endpoint updates a Glue job.
     """
     try:
         response = client.update_job(
@@ -194,7 +194,7 @@ async def update_job(glue:Glue_job):
 @app.get("/job/start_job_run/{JobName}")
 async def start_job_run(JobName: str): 
     """
-    This endpoint return the specific Glue job.
+    This endpoint start the specific Glue job.
     """
     try:
         response = client.start_job_run(
@@ -225,9 +225,9 @@ async def start_job_run(JobName: str):
         return ExceptionResponse()
 
 @app.get("/job/get_job_run/{JobName}/{RunId}")
-async def start_job_run(JobName: str, RunId: str= Field(min_length=1, max_length=255)): 
+async def get_job_run(JobName: str, RunId: str= Field(min_length=1, max_length=255)): 
     """
-    This endpoint return the specific Glue job.
+    This endpoint return the specific Glue job running status.
     """
     try:
         response = client.get_job_run(
@@ -255,9 +255,9 @@ async def start_job_run(JobName: str, RunId: str= Field(min_length=1, max_length
         return ExceptionResponse()
 
 @app.get("/job/get_job_runs/{JobName}")
-async def start_job_run(JobName: str): 
+async def get_job_runs(JobName: str): 
     """
-    This endpoint return the specific Glue job.
+    This endpoint return the specific Glue job runs history.
     """
     try:
         response = client.get_job_runs(
