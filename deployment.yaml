@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glue-job
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: glue-job
+  template:
+    metadata:
+      labels:
+        app: glue-job
+    spec:
+      containers:
+      - name: glue-job
+        image:  vijay165/glue_job
+        ports:
+        - containerPort: 80

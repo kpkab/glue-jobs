@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: glue-job-service
+spec:
+  selector:
+    app: glue-job
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
